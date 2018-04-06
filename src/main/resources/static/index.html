@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html ng-app="topicApp">
+<head>
+<title>Topic & Course App</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!--
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+        -->
+
+
+<link rel="stylesheet"
+	href="../js/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<script src="../js/jQuery 3.1.1/jquery-3.1.1.js"></script>
+<script src="../js/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="../js/angular-1.6.2/angular.js"></script>
+
+<script src="../js/app.js"></script>
+<script src="../js/service/appConfig.service.js"></script>
+<script src="../js/service/appName.service.js"></script>
+<script src="../js/service/topicData.service.js"></script>
+<script src="../js/service/courseData.service.js"></script>
+<script src="../js/controller/topic.controller.js"></script>
+<script src="../js/controller/course.controller.js"></script>
+</head>
+<body>
+	<div ng-controller="HeaderCtrl as head">
+		<h1 style="text-align: center">{{head.appTitle}}</h1>
+	</div>
+	<div class="row">
+		<div class='container' ng-controller="TopicCtrl as ctrl">
+			<div class="alert alert-success" ng-if="ctrl.successMessage">
+				{{ctrl.successMessage}}</div>
+
+			<div class="alert alert-danger" ng-if="ctrl.errorMessage">
+				{{ctrl.errorMessage}}</div>
+			<div class="col-md-3">
+				<ul class='list-group'>
+					<h3>Topic name</h3>
+					<li class="list-group-item" ng-repeat="item in ctrl.topics" ng-click="ctrl.selectTopic($index)">
+					<span>{{item.name}}</span>
+					</li>
+				</ul>
+				<button ng-hide="ctrl.show02" ng-click="ctrl.addTopic()">Add&Edit Topic</button>
+				<p>
+					<span ng-show="ctrl.show02">Topic name:</span><br /> 
+					<input ng-show="ctrl.show02" type="text" ng-model="ctrl.selectedTopic.name"><br />
+				</p>
+				<button ng-show="ctrl.show02" ng-click="ctrl.saveTopic()">Save</button>
+				<button ng-show="ctrl.show02" ng-click="ctrl.deleteTopic()">Delete</button>
+			</div>
+			<div class="col-md-3">
+				<ul class='list-group'>
+					<h3>Description</h3>
+					<li class="list-group-item" ng-repeat="item in ctrl.topics" ng-click="ctrl.selectTopic($index)">
+					<span>{{item.description}}</span>
+					</li>
+				</ul>
+				<p>
+					<span ng-show="ctrl.show02">Topic description:</span><br /> 
+					<input ng-show="ctrl.show02" type="text" ng-model="ctrl.selectedTopic.description">
+				</p>
+			</div>
+
+			<div class="col-md-6" ng-show="ctrl.show">
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class='container' ng-controller="CourseCtrl as ctrl">
+			<div class="alert alert-success" ng-if="ctrl.successMessage">
+				{{ctrl.successMessage}}</div>
+
+			<div class="alert alert-danger" ng-if="ctrl.errorMessage">
+				{{ctrl.errorMessage}}</div>
+			<div class="col-md-3">
+				<ul class='list-group'>
+					<h3>Course name</h3>
+					<li class="list-group-item" ng-repeat="item in ctrl.courses"
+						ng-click="ctrl.selectCourse($index)"><span>{{item.name}}</span>
+					</li>
+				</ul>
+				<button ng-hide="ctrl.show03" ng-click="ctrl.addCourse()">Add&Edit Course</button>
+				<p>
+					<span ng-show="ctrl.show03">Course name:</span><br /> 
+					<input
+						ng-show="ctrl.show03" type="text"
+						ng-model="ctrl.selectedCourse.name"><br />
+				</p>
+				<button ng-show="ctrl.show03" ng-click="ctrl.saveCourse()">Save</button>
+				<button ng-show="ctrl.show03" ng-click="ctrl.deleteCourse()">Delete</button>
+			</div>
+			<div class="col-md-3">
+				<ul class='list-group'>
+					<h3>Description</h3>
+					<li class="list-group-item" ng-repeat="item in ctrl.courses"
+						ng-click="ctrl.selectCourse($index)">
+						<span>{{item.description}}</span>
+					</li>
+				</ul>
+				<p>
+					<span ng-show="ctrl.show03">Course description:</span><br /> 
+					<input
+						ng-show="ctrl.show03" type="text"
+						ng-model="ctrl.selectedCourse.description">
+				</p>
+			</div>
+			<div class="col-md-3">
+				<ul class='list-group'>
+					<h3>Topic</h3>
+					<li class="list-group-item" ng-repeat="item in ctrl.courses" ng-click="ctrl.selectCourse($index)">
+						<span>{{item.topic.name}}</span>
+					</li>
+				</ul>
+				<p>
+					<span ng-show="ctrl.show03">Topic name:</span><br /> 
+					<form ng-show="ctrl.show03"> 
+						<select ng-model="ctrl.selectedCourse.topic.id">
+							<option value="1">Java
+							<option value="2">C#
+							<option value="3">AngularJS
+						</select>
+					
+					</form>
+				</p>
+			</div>
+			<div class="col-md-3" ng-show="ctrl.show03"></div>
+		</div>
+	</div>
+	<hr>
+
+	<div ng-controller="FooterCtrl as foot">
+		<h1 style="text-align: center; font-size: smaller">{{foot.appTitle}}</h1>
+		<h2 style="text-align: center; font-size: small">{{foot.builtDate}}</h2>
+	</div>
+</body>
+</html>
