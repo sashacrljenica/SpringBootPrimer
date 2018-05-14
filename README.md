@@ -1,2 +1,2 @@
 # SpringBootPrimer
-SpringBoot Aplication
+SpringBoot Aplication with REST service written in Java.
